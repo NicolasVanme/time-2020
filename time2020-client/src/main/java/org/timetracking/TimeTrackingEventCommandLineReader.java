@@ -13,27 +13,12 @@ public class TimeTrackingEventCommandLineReader {
     public TimeTrackingEvent read(String[] args) {
         validateCommandLine(args);
 
-        return new TimeTrackingEvent() {
-            @Override
-            public int getEmployeeId() {
-                return Integer.parseInt(args[0]);
-            }
-
-            @Override
-            public int getTaskId() {
-                return Integer.parseInt(args[2]);
-            }
-
-            @Override
-            public TimeTrackingEventType getType() {
-                return TimeTrackingEventType.valueOf(args[1].toUpperCase());
-            }
-
-            @Override
-            public LocalDateTime getEventDateTime() {
-                return LocalDateTime.now();
-            }
-        };
+        return new TimeTrackingEvent(
+                Integer.parseInt(args[0]),
+                Integer.parseInt(args[2]),
+                TimeTrackingEventType.valueOf(args[1].toUpperCase()),
+                LocalDateTime.now()
+                );
     }
 
     private void validateCommandLine(String[] args) {

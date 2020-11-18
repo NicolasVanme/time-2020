@@ -25,28 +25,12 @@ public class TimeTrackingEventConverter {
         if (messageParts.length != 4) {
             throw new IllegalArgumentException(format("Provided string '%s' is not correctly formatted", message));
         }
+        return new TimeTrackingEvent(
+                Integer.parseInt(messageParts[0]),
+                Integer.parseInt(messageParts[1]),
+                TimeTrackingEventType.valueOf(messageParts[2]),
+                LocalDateTime.ofEpochSecond(Long.parseLong(messageParts[3]), 0, ZoneOffset.UTC));
 
-        return new TimeTrackingEvent() {
-            @Override
-            public int getEmployeeId() {
-                return Integer.parseInt(messageParts[0]);
-            }
-
-            @Override
-            public int getTaskId() {
-                return Integer.parseInt(messageParts[1]);
-            }
-
-            @Override
-            public TimeTrackingEventType getType() {
-                return TimeTrackingEventType.valueOf(messageParts[2]);
-            }
-
-            @Override
-            public LocalDateTime getEventDateTime() {
-                return LocalDateTime.ofEpochSecond(Long.parseLong(messageParts[3]), 0, ZoneOffset.UTC);
-            }
-        };
     }
 
     private long toSecond(LocalDateTime localDateTime) {
