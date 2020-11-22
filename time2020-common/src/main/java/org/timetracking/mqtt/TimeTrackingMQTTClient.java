@@ -82,6 +82,7 @@ class TimeTrackingMQTTClient implements TimeTrackingMQTTEventPublisher, TimeTrac
         }
     }
 
+
     public void addListener(TimeTrackingEventListener listener) {
         Objects.requireNonNull(listener, "Listener is mandatory");
 
